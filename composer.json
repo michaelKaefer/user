@@ -1,7 +1,7 @@
 {
   "name": "operating-system/user",
   "description": "Wrapper for retrieving information about an operating system user with native PHP functions",
-  "homepage": "http://github.com/michaelKaefer/monolog",
+  "homepage": "http://github.com/michaelKaefer/user",
   "license": "MIT",
   "authors": [
     {
