@@ -11,7 +11,7 @@ composer require operating-system/user
 ## Usage
 
 ```php
-$user = new User(0);
+$user = new \OperatingSystem\User\User(0);
 
 $user->getName();           // 'root'
 $user->getPassword();       // 'x'
