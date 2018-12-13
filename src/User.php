@@ -13,11 +13,6 @@ class User
     const SHELL = 'shell';
 
     /**
-     * @var int
-     */
-    private $uid;
-
-    /**
      * @var array
      */
     private $passwd;
@@ -26,11 +21,18 @@ class User
      * Owner constructor.
      *
      * @param int $uid
+     *
+     * @throws \Exception
      */
     public function __construct($uid)
     {
-        $this->uid = $uid;
-        $this->passwd = \posix_getpwuid($this->uid);
+        if (!function_exists('posix_getpwuid')) {
+            throw new \Exception(
+                'Could not retrieve information about the operating system user because POSIX functions '
+                . 'are not available to your PHP executable.'
+            );
+        }
+        $this->passwd = \posix_getpwuid($uid);
     }
 
     public function getName()
