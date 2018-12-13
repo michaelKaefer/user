@@ -10,55 +10,100 @@ class UserTest extends TestCase
     /**
      * @var User
      */
-    protected $user;
+    protected $ownerOfCurrentScript;
+
+    /**
+     * @var User
+     */
+    protected $effectiveUserOfCurrentProcess;
+
+    /**
+     * @var User
+     */
+    protected $realUserOfCurrentProcess;
+
+    /**
+     * @var User
+     */
+    protected $ownerOfThisFile;
 
     protected function setUp()
     {
-        $this->user = new User(0);
+        $this->ownerOfCurrentScript = User::createFromExecutedFileOwner();
+        $this->effectiveUserOfCurrentProcess = User::createFromEffectiveProcessUser();
+        $this->realUserOfCurrentProcess = User::createFromRealProcessUser();
+        $this->ownerOfThisFile = User::createFromFileOwner(__FILE__);
     }
 
     protected function tearDown()
     {
-        $this->user = null;
+        $this->ownerOfCurrentScript = null;
+        $this->effectiveUserOfCurrentProcess = null;
+        $this->realUserOfCurrentProcess = null;
+        $this->ownerOfThisFile = null;
     }
 
     public function testInstantiation()
     {
-        $this->assertInstanceOf(User::class, $this->user);
+        $this->assertInstanceOf(User::class, $this->ownerOfCurrentScript);
+        $this->assertInstanceOf(User::class, $this->effectiveUserOfCurrentProcess);
+        $this->assertInstanceOf(User::class, $this->realUserOfCurrentProcess);
+        $this->assertInstanceOf(User::class, $this->ownerOfThisFile);
     }
 
     public function testGetName()
     {
-        $this->assertIsString($this->user->getName());
+        $this->assertIsString($this->ownerOfCurrentScript->getName());
+        $this->assertIsString($this->effectiveUserOfCurrentProcess->getName());
+        $this->assertIsString($this->realUserOfCurrentProcess->getName());
+        $this->assertIsString($this->ownerOfThisFile->getName());
     }
 
     public function testGetPassword()
     {
-        $this->assertIsString($this->user->getPassword());
+        $this->assertIsString($this->ownerOfCurrentScript->getPassword());
+        $this->assertIsString($this->effectiveUserOfCurrentProcess->getPassword());
+        $this->assertIsString($this->realUserOfCurrentProcess->getPassword());
+        $this->assertIsString($this->ownerOfThisFile->getPassword());
     }
 
     public function testGetUid()
     {
-        $this->assertIsInt($this->user->getUid());
+        $this->assertIsInt($this->ownerOfCurrentScript->getUid());
+        $this->assertIsInt($this->effectiveUserOfCurrentProcess->getUid());
+        $this->assertIsInt($this->realUserOfCurrentProcess->getUid());
+        $this->assertIsInt($this->ownerOfThisFile->getUid());
     }
 
     public function testGetGid()
     {
-        $this->assertIsInt($this->user->getGid());
+        $this->assertIsInt($this->ownerOfCurrentScript->getGid());
+        $this->assertIsInt($this->effectiveUserOfCurrentProcess->getGid());
+        $this->assertIsInt($this->realUserOfCurrentProcess->getGid());
+        $this->assertIsInt($this->ownerOfThisFile->getGid());
     }
 
     public function testGetGecos()
     {
-        $this->assertIsString($this->user->getGecos());
+        $this->assertIsString($this->ownerOfCurrentScript->getGecos());
+        $this->assertIsString($this->effectiveUserOfCurrentProcess->getGecos());
+        $this->assertIsString($this->realUserOfCurrentProcess->getGecos());
+        $this->assertIsString($this->ownerOfThisFile->getGecos());
     }
 
     public function testHomeDirectory()
     {
-        $this->assertIsString($this->user->getHomeDirectory());
+        $this->assertIsString($this->ownerOfCurrentScript->getHomeDirectory());
+        $this->assertIsString($this->effectiveUserOfCurrentProcess->getHomeDirectory());
+        $this->assertIsString($this->realUserOfCurrentProcess->getHomeDirectory());
+        $this->assertIsString($this->ownerOfThisFile->getHomeDirectory());
     }
 
     public function testGetShell()
     {
-        $this->assertIsString($this->user->getShell());
+        $this->assertIsString($this->ownerOfCurrentScript->getShell());
+        $this->assertIsString($this->effectiveUserOfCurrentProcess->getShell());
+        $this->assertIsString($this->realUserOfCurrentProcess->getShell());
+        $this->assertIsString($this->ownerOfThisFile->getShell());
     }
 }
