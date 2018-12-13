@@ -13,12 +13,13 @@ composer require operating-system/user
 Instantiate user with uid 0:
 
 ```php
+use OperatingSystem\User\User;
+use OperatingSystem\User\Exception\PosixNotAvailableException;
+
 try {
-    $user = new \OperatingSystem\User\User(0);
-} catch (\OperatingSystem\User\Exception\PosixNotAvailableException $e) {
-    $e->getMessage;         // 'Could not retrieve information about the 
-                            // operating system user because POSIX functions
-                            // are not available to your PHP executable.'
+    $user = new User(0);
+} catch (PosixNotAvailableException $e) {
+    $e->getMessage;         // 'Could not retrieve information about the operating system user because POSIX functions are not available to your PHP executable.'
 }
 ```
 
@@ -36,44 +37,39 @@ $user->getShell();          // '/bin/bash'
 
 Factory methods:
 ```php
+use OperatingSystem\User\Factory\UserFactory;
+use OperatingSystem\User\Exception\PosixNotAvailableException;
+
 try {
-    $user = \OperatingSystem\User\Factory\UserFactory::createFromExecutedFileOwner();
-} catch (\OperatingSystem\User\Exception\PosixNotAvailableException $e) {
-    $e->getMessage;         // 'Could not retrieve information about the 
-                            // operating system user because POSIX functions
-                            // are not available to your PHP executable.'
+    $user = UserFactory::createFromExecutedFileOwner();
+} catch (PosixNotAvailableException $e) {
+    $e->getMessage;         // 'Could not retrieve information about the operating system user because POSIX functions are not available to your PHP executable.'
 } catch (\Exception $e) {
     $e->getMessage;         // 'Could not get the owner of the current script.'
 }
 
 try {
-    $user = \OperatingSystem\User\Factory\UserFactory::createFromEffectiveProcessUser();
-} catch (\OperatingSystem\User\Exception\PosixNotAvailableException $e) {
-    $e->getMessage;         // 'Could not retrieve information about the 
-                            // operating system user because POSIX functions
-                            // are not available to your PHP executable.'
+    $user = UserFactory::createFromEffectiveProcessUser();
+} catch (PosixNotAvailableException $e) {
+    $e->getMessage;         // 'Could not retrieve information about the operating system user because POSIX functions are not available to your PHP executable.'
 } catch (\Exception $e) {
     $e->getMessage;         // 'Could not get the effective user of the current process.'
 }
 
 try {
-    $user = \OperatingSystem\User\Factory\UserFactory::createFromRealProcessUser();
-} catch (\OperatingSystem\User\Exception\PosixNotAvailableException $e) {
-    $e->getMessage;         // 'Could not retrieve information about the 
-                            // operating system user because POSIX functions
-                            // are not available to your PHP executable.'
+    $user = UserFactory::createFromRealProcessUser();
+} catch (PosixNotAvailableException $e) {
+    $e->getMessage;         // 'Could not retrieve information about the operating system user because POSIX functions are not available to your PHP executable.'
 } catch (\Exception $e) {
     $e->getMessage;         // 'Could not get the real user of the current process.'
 }
 
 try {
-    $user = \OperatingSystem\User\Factory\UserFactory::createFromFileOwner(__FILE__);
+    $user = UserFactory::createFromFileOwner(__FILE__);
 } catch (\InvalidArgumentException $e) {
     $e->getMessage;         // 'Invalid file name provided.'
-} catch (\OperatingSystem\User\Exception\PosixNotAvailableException $e) {
-    $e->getMessage;         // 'Could not retrieve information about the 
-                            // operating system user because POSIX functions
-                            // are not available to your PHP executable.'
+} catch (PosixNotAvailableException $e) {
+    $e->getMessage;         // 'Could not retrieve information about the operating system user because POSIX functions are not available to your PHP executable.'
 } catch (\Exception $e) {
     $e->getMessage;         // 'Could not get the real user of the current process.'
 }
