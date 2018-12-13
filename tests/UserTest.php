@@ -3,6 +3,7 @@
 namespace OperatingSystem\User\Tests;
 
 use OperatingSystem\User\User;
+use OperatingSystem\User\Factory\UserFactory;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
@@ -29,10 +30,10 @@ class UserTest extends TestCase
 
     protected function setUp()
     {
-        $this->ownerOfCurrentScript = User::createFromExecutedFileOwner();
-        $this->effectiveUserOfCurrentProcess = User::createFromEffectiveProcessUser();
-        $this->realUserOfCurrentProcess = User::createFromRealProcessUser();
-        $this->ownerOfThisFile = User::createFromFileOwner(__FILE__);
+        $this->ownerOfCurrentScript = UserFactory::createFromExecutedFileOwner();
+        $this->effectiveUserOfCurrentProcess = UserFactory::createFromEffectiveProcessUser();
+        $this->realUserOfCurrentProcess = UserFactory::createFromRealProcessUser();
+        $this->ownerOfThisFile = UserFactory::createFromFileOwner(__FILE__);
     }
 
     protected function tearDown()

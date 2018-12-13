@@ -37,7 +37,7 @@ $user->getShell();          // '/bin/bash'
 Factory methods:
 ```php
 try {
-    $user = User::createFromExecutedFileOwner();
+    $user = \OperatingSystem\User\Factory\UserFactory::createFromExecutedFileOwner();
 } catch (\OperatingSystem\User\Exception\PosixNotAvailableException $e) {
     $e->getMessage;         // 'Could not retrieve information about the 
                             // operating system user because POSIX functions
@@ -47,7 +47,7 @@ try {
 }
 
 try {
-    $user = User::createFromEffectiveProcessUser();
+    $user = \OperatingSystem\User\Factory\UserFactory::createFromEffectiveProcessUser();
 } catch (\OperatingSystem\User\Exception\PosixNotAvailableException $e) {
     $e->getMessage;         // 'Could not retrieve information about the 
                             // operating system user because POSIX functions
@@ -57,7 +57,7 @@ try {
 }
 
 try {
-    $user = User::createFromRealProcessUser();
+    $user = \OperatingSystem\User\Factory\UserFactory::createFromRealProcessUser();
 } catch (\OperatingSystem\User\Exception\PosixNotAvailableException $e) {
     $e->getMessage;         // 'Could not retrieve information about the 
                             // operating system user because POSIX functions
@@ -67,7 +67,7 @@ try {
 }
 
 try {
-    $user = User::createFromFileOwner(__FILE__);
+    $user = \OperatingSystem\User\Factory\UserFactory::createFromFileOwner(__FILE__);
 } catch (\InvalidArgumentException $e) {
     $e->getMessage;         // 'Invalid file name provided.'
 } catch (\OperatingSystem\User\Exception\PosixNotAvailableException $e) {
